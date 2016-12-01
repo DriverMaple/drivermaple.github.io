@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="互联网实现的常用的两个模型：
+OSI模型（七层）
+TCP/IP模型（五层，RT，这里主要介绍TCP/IP模型）
+
+TCP/IP五层模型（自下而上介绍）：物理层：这一层比较好理解，解释实现网络而使用的物理方面技术，白话点能把电脑连在一块的技术，比如说光缆、电缆、无线电波等方式。这一层级的作用就是用来传" />
+  
 
   
   
@@ -11,14 +17,30 @@
   
   
   
-  <title>Mr.Maple Blog</title>
+  <title>Internet协议入门（TCP/IP模型） | Mr.Maple Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Maple Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="互联网实现的常用的两个模型：
+OSI模型（七层）
+TCP/IP模型（五层，RT，这里主要介绍TCP/IP模型）
+
+TCP/IP五层模型（自下而上介绍）：物理层：这一层比较好理解，解释实现网络而使用的物理方面技术，白话点能把电脑连在一块的技术，比如说光缆、电缆、无线电波等方式。这一层级的作用就是用来传递0、1电信号。数据链路层：当物理层把信号传递给计算机时，如何解读这些信号？这就链路层所要完成的工作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Internet协议入门（TCP/IP模型）">
+<meta property="og:url" content="http://yoursite.com/2016/12/01/Internet/index.html">
 <meta property="og:site_name" content="Mr.Maple Blog">
+<meta property="og:description" content="互联网实现的常用的两个模型：
+OSI模型（七层）
+TCP/IP模型（五层，RT，这里主要介绍TCP/IP模型）
+
+TCP/IP五层模型（自下而上介绍）：物理层：这一层比较好理解，解释实现网络而使用的物理方面技术，白话点能把电脑连在一块的技术，比如说光缆、电缆、无线电波等方式。这一层级的作用就是用来传递0、1电信号。数据链路层：当物理层把信号传递给计算机时，如何解读这些信号？这就链路层所要完成的工作">
+<meta property="og:updated_time" content="2016-12-01T03:16:45.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Maple Blog">
+<meta name="twitter:title" content="Internet协议入门（TCP/IP模型）">
+<meta name="twitter:description" content="互联网实现的常用的两个模型：
+OSI模型（七层）
+TCP/IP模型（五层，RT，这里主要介绍TCP/IP模型）
+
+TCP/IP五层模型（自下而上介绍）：物理层：这一层比较好理解，解释实现网络而使用的物理方面技术，白话点能把电脑连在一块的技术，比如说光缆、电缆、无线电波等方式。这一层级的作用就是用来传递0、1电信号。数据链路层：当物理层把信号传递给计算机时，如何解读这些信号？这就链路层所要完成的工作">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -59,17 +81,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-Internet" class="post-Internet post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-Internet" class="post-Internet post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/12/01/Internet/">Internet协议入门（TCP/IP模型）</a>
+    <h1 class="entry-title article-title">
+      Internet协议入门（TCP/IP模型）
     </h1>
   
 
@@ -115,81 +135,20 @@
 </article>
 
 
-
-
-
-
-  
-    <article id="post-Thread" class="post-Thread post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/11/16/Thread/">重温Java，再拾线程</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/11/16/Thread/" data-id="ciw5sks9n0001k0v06e09jt38" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h3 id="前言：学习编程已经到第三个年头了，细想一路走来，不论是从一开始学习的android还是如今的在学习的后台开发，都绕不开java这门编程语言。然而我对这门语言了解多少？扪心自问，真的不多。时至今日，在开发之路上走的越远越感觉自己对于这门语言的了解太过肤浅，因此趁着我还有时间，趁着还没因为基础知识而在开发之路上遇到瓶颈，花些功夫补一补java基础。"><a href="#前言：学习编程已经到第三个年头了，细想一路走来，不论是从一开始学习的android还是如今的在学习的后台开发，都绕不开java这门编程语言。然而我对这门语言了解多少？扪心自问，真的不多。时至今日，在开发之路上走的越远越感觉自己对于这门语言的了解太过肤浅，因此趁着我还有时间，趁着还没因为基础知识而在开发之路上遇到瓶颈，花些功夫补一补java基础。" class="headerlink" title="前言：学习编程已经到第三个年头了，细想一路走来，不论是从一开始学习的android还是如今的在学习的后台开发，都绕不开java这门编程语言。然而我对这门语言了解多少？扪心自问，真的不多。时至今日，在开发之路上走的越远越感觉自己对于这门语言的了解太过肤浅，因此趁着我还有时间，趁着还没因为基础知识而在开发之路上遇到瓶颈，花些功夫补一补java基础。"></a>前言：学习编程已经到第三个年头了，细想一路走来，不论是从一开始学习的android还是如今的在学习的后台开发，都绕不开java这门编程语言。然而我对这门语言了解多少？扪心自问，真的不多。时至今日，在开发之路上走的越远越感觉自己对于这门语言的了解太过肤浅，因此趁着我还有时间，趁着还没因为基础知识而在开发之路上遇到瓶颈，花些功夫补一补java基础。</h3><h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="线程的概念："><a href="#线程的概念：" class="headerlink" title="线程的概念："></a>线程的概念：</h2><p>线程，可以称作是轻量级的进程，但二者属于包含关系，线程包含在进程中，一个进程中拥有大于或等于1的线程数。进程和线程的区别在于线程没有独立的存储空间，一个线程和其他同属一个进程中的线程共用一个存储空间，也就是说，线程是建立在进程的基础上。</p>
-<h2 id="线程的创建方法："><a href="#线程的创建方法：" class="headerlink" title="线程的创建方法："></a>线程的创建方法：</h2><ul>
-<li>继承Thread类：<br>直接编写类继承Thread类，在使用时只需实例化对象，然后调用start（）方法即可实现一个线程，简单粗暴。</li>
-<li>实现Runnable接口：<br>编写类实现Runnable接口，使用时也是需要实例化对象（假设为t），不同的是此时并不算创建出一个线程，要实现线程需要再次实例化一个对象并且调用Thread的构造方法，注意调用构造方法时需要t作为构造参数传入，也就是类似于new Thread（t，”Thread-1”）。而后同样是调用Start（）方法。</li>
-<li>二者区别：其实就运行过程及其结果而言谈不上什么区别，但对于程序员而言Runnable实现法更优。众所周知，java是一门单继承语言，如果有要实现多个类功能的想法，Runnable无疑是唯一的实现方法；其次Runnable实现法有利于程序的健壮性，代码能被多个线程共享，代码与数据是独立的（试想一下若在本例中t被用于构造出多个对象，那么这些线程将能够访问同一个对象的数据）</li>
-</ul>
-<h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><ul>
-<li>新建</li>
-<li>就绪</li>
-<li>运行</li>
-<li>阻塞</li>
-<li>死亡</li>
-</ul>
-<h2 id="方法及其对线程状态所产生影响"><a href="#方法及其对线程状态所产生影响" class="headerlink" title="方法及其对线程状态所产生影响"></a>方法及其对线程状态所产生影响</h2><ul>
-<li>new：调用构造函数，线程处于新建状态。</li>
-<li>start()：使线程处于就绪状态。</li>
-<li>sleep()：使该线程处于阻塞态，不释放已占有的资源，待过了沉睡秒数再次进入就绪状态。</li>
-<li>join()：使调用该方法的运行，阻塞调用时所在的线程，一般是调用该方法线程运行完成后，其所在线程才能够重新进入就绪态。</li>
-<li>yield()：又称为“让步线程”，调用后该线程将让步其他线程，自己从运行态直接转为就绪态，处于就绪队列中等待运行，实质上就是让步于其他就绪队列中的线程。</li>
-</ul>
-<h3 id="一些有关的其他知识："><a href="#一些有关的其他知识：" class="headerlink" title="一些有关的其他知识："></a>一些有关的其他知识：</h3><ul>
-<li>实现同步互斥问题时临界资源关键字：synchronized</li>
-<li>主线程的优先级默认为5（线程优先级：1-10）<br>&lt;！–more–&gt;</li>
-</ul>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/11/16/Thread/">
-    <time datetime="2016-11-16T11:49:18.000Z" class="entry-date">
-        2016-11-16
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java核心技术/">Java核心技术</a></li></ul>
-
-    </footer>
-</article>
+        <span class="nav-next"><a href="/2016/11/16/Thread/" rel="next">重温Java，再拾线程 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
