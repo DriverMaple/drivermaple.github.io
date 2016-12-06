@@ -61,6 +61,55 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-ChangeJavaVersion" class="post-ChangeJavaVersion post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/12/06/ChangeJavaVersion/">windows下使用脚本切换java版本</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/12/06/ChangeJavaVersion/" data-id="ciwdpdfji0000y4v0dtblg8v3" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>前阵子因为一个项目的需要，要求我们配置java1.7版本，可我原来的是1.8的，虽说也就安装完之后改改环境变量什么的，但未来要是还要换回1.8版本又要下载安装再修改环境变量，好TM麻烦！有没有办法可以在电脑上保留两个版本还能自由切换？别说，上网一搜还真有。</p>
+<h2 id="首先，创建一个txt文件，命名为changeV，复制如下代码："><a href="#首先，创建一个txt文件，命名为changeV，复制如下代码：" class="headerlink" title="首先，创建一个txt文件，命名为changeV，复制如下代码："></a>首先，创建一个txt文件，命名为changeV，复制如下代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">@echo off </div><div class="line">  </div><div class="line">:init </div><div class="line">set JAVA_HOME_1_8=D:\Program Files\Java\jdk1.8.0_91</div><div class="line">set JAVA_HOME_1_7=D:\Program Files\Java\jdk1.7.0_79</div><div class="line">  </div><div class="line">:start </div><div class="line">echo JDK 版本: </div><div class="line">java -version </div><div class="line">ping 127.0.0.1 -n 2 -w 1000 &gt; nul </div><div class="line">echo. </div><div class="line">echo ============================================= </div><div class="line">echo jdk版本列表 </div><div class="line">echo 1.8 </div><div class="line">echo 1.7 </div><div class="line">echo ============================================= </div><div class="line">  </div><div class="line">:select</div><div class="line">set /p opt=请选择jdk版本： </div><div class="line">if %opt%==1.8 ( </div><div class="line"> start /I /WAIT /B wmic ENVIRONMENT where name=&apos;JAVA_HOME&apos; set VariableValue=&quot;%JAVA_HOME_1_8%&quot; &gt;nul </div><div class="line">rem reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment&quot; /v JAVA_HOME /t reg_sz /d &quot;%JAVA_HOME_1_8%&quot; /f</div><div class="line"> goto success </div><div class="line">) </div><div class="line">if %opt%==1.7 ( </div><div class="line">  start /I /WAIT /B wmic ENVIRONMENT where name=&apos;JAVA_HOME&apos; set VariableValue=&quot;%JAVA_HOME_1_7%&quot; &gt;nul </div><div class="line">rem reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment&quot; /v JAVA_HOME /t reg_sz /d &quot;%JAVA_HOME_1_7%&quot; /f</div><div class="line">  goto success </div><div class="line">) </div><div class="line">echo 选择的版本错误,请重新选择！ </div><div class="line">PAUSE </div><div class="line">goto start </div><div class="line">  </div><div class="line">:success </div><div class="line">echo. </div><div class="line">echo 设置环境变了成功. </div><div class="line">rem -- refresh env ---</div><div class="line">call D:\java_jdk_swith\RefreshEnv.exe</div><div class="line">ping 127.0.0.1 -n 2 -w 1000 &gt; nul </div><div class="line">ping 127.0.0.1 -n 3 -w 1000 &gt; nul</div></pre></td></tr></table></figure>
+<p>这里需要注意几个地方：<br>1、JAVA_HOME的路径需要修改为自己的，相应的，JDK的版本也根据实际需要修改；<br>2、call D:\java_jdk_swith\RefreshEnv.exe，这里有个exe文件<a href="http://pan.baidu.com/s/1bo16BXt" target="_blank" rel="external">（点击这里下载）</a>，下载完后存放路径需要根据实际情况修改，这个程序的主要作用是刷新保存环境变量信息（changeV运行完并不会保存，所以不会生效）。<br>3、保存changeV，并将后缀改为.bat，也就是一个脚本文件了。</p>
+<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><p>1、以管理员身份运行bat文件，会出现如下黑框：<br><img src="https://drivermaple.github.io/img/20161207-1.jpg" alt=""><br>2、键入你需要的jdk版本，耐心等待执行完毕。<br>3、命令行中输入“java -version”验证版本是否切换成功，如果未切换成功，也许是你的bat文件有问题，或者是bat未自动调用exe文件进行环境变量保存，这时候就手动双击exe文件运行得了。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/12/06/ChangeJavaVersion/">
+    <time datetime="2016-12-06T15:34:13.384Z" class="entry-date">
+        2016-12-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实用小技巧/">实用小技巧</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-AboutLombok" class="post-AboutLombok post type-post status-publish format-standard hentry">
     <!---->
 
@@ -76,14 +125,14 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/12/01/AboutLombok/" data-id="ciwdnq94f0001jwv0g55jcmm9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/12/01/AboutLombok/" data-id="ciwdnyr3100008cv0b784384e" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
         <h3 id="官方网址：https-projectlombok-org"><a href="#官方网址：https-projectlombok-org" class="headerlink" title="官方网址：https://projectlombok.org/"></a>官方网址：<a href="https://projectlombok.org/" target="_blank" rel="external">https://projectlombok.org/</a></h3><h3 id="在线帮助文档：https-projectlombok-org-features-index-html"><a href="#在线帮助文档：https-projectlombok-org-features-index-html" class="headerlink" title="在线帮助文档：https://projectlombok.org/features/index.html"></a>在线帮助文档：<a href="https://projectlombok.org/features/index.html" target="_blank" rel="external">https://projectlombok.org/features/index.html</a></h3><h2 id="Eclipse环境下安装："><a href="#Eclipse环境下安装：" class="headerlink" title="Eclipse环境下安装："></a>Eclipse环境下安装：</h2><ul>
-<li>运行安装：<br>java -jar D:\Software\lombok\lombok.jar<br><img src="https://" alt="drivermaple.github.io/img/322282-20160902114725027-1734397636"><br>选择IDE所在路径点击Install/Update即可使用。</li>
+<li>运行安装：<br>java -jar D:\Software\lombok\lombok.jar<br><img src="https://drivermaple.github.io/img/322282-20160902114725027-1734397636.png" alt=""><br>选择IDE所在路径点击Install/Update即可使用。</li>
 <li>手动安装：<br>手动安装</li>
 </ul>
 <ol>
@@ -94,7 +143,7 @@
 <li><p>重启IDE。</p>
 </li>
 </ol>
-<h2 id="IDEA环境下安装："><a href="#IDEA环境下安装：" class="headerlink" title="IDEA环境下安装："></a>IDEA环境下安装：</h2><p><img src="https://" alt="drivermaple.github.io/img/322282-20160902114727543-928614566"><br><img src="https://" alt="drivermaple.github.io/img/322282-20160902114734027-916656385"></p>
+<h2 id="IDEA环境下安装："><a href="#IDEA环境下安装：" class="headerlink" title="IDEA环境下安装："></a>IDEA环境下安装：</h2><p><img src="https://drivermaple.github.io/img/322282-20160902114727543-928614566.png" alt=""><br><img src="https://drivermaple.github.io/img/322282-20160902114734027-916656385.png" alt=""></p>
 <h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><ul>
 <li>常用注解：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@Data：注解在类上；提供类所有属性的getting和setting方法，此外还提供了equals、canEqual、hashCode、toString方法</div><div class="line">@Setter：注解在属性上；为属性提供setting方法</div><div class="line">@Getter：注解在属性上；为属性提供getting方法</div><div class="line">@Log4j：注解在类上；为类提供一个 属性名为log的log4j日志对象</div><div class="line">@NoArgsConstructor：注解在类上；为类提供一个无参的构造方法</div><div class="line">@AllArgsConstructor：注解在类上；为类提供一个全参的构造方法</div></pre></td></tr></table></figure></li>
 </ul>
@@ -137,7 +186,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/12/01/Internet/" data-id="ciwdnq93j0000jwv064t25uhe" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/12/01/Internet/" data-id="ciwdnyr4100038cv0tv4j0y72" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -196,7 +245,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/11/16/Thread/" data-id="ciwdnq95a0006jwv0pcn5078n" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/11/16/Thread/" data-id="ciwdnyr3d00018cv0ybizjexj" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -273,6 +322,10 @@
       <ul>
         
           <li>
+            <a href="/2016/12/06/ChangeJavaVersion/">windows下使用脚本切换java版本</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/01/AboutLombok/">lombok的安装、配置、使用</a>
           </li>
         
@@ -293,7 +346,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java核心技术/">Java核心技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台编程/">后台编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java核心技术/">Java核心技术</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台编程/">后台编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实用小技巧/">实用小技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -302,7 +355,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/Java核心技术/" style="font-size: 10px;">Java核心技术</a> <a href="/tags/后台编程/" style="font-size: 10px;">后台编程</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+      <a href="/tags/Java核心技术/" style="font-size: 10px;">Java核心技术</a> <a href="/tags/后台编程/" style="font-size: 10px;">后台编程</a> <a href="/tags/实用小技巧/" style="font-size: 10px;">实用小技巧</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
     </div>
   </aside>
 
